@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+	<table align="left">
+		<tr>
+			<th>Shipcode</th>
+		</tr>
+		<tr>
+			<th>{{post.shipcode}}</th>
+		</tr>
+	</table>
+	<table align="center" width=70%>
+		
+		<tr>
+			<th>Bên gửi</th>
+			<th>Bên nhận</th>
+		</tr>
+		<tr>
+			<td>{{post.name}}</td>
+			<td>{{post.reciever}}</td>
+		</tr>
+		<tr>
+			<td>{{post.address}}</td>
+			<td>{{post.reciever_address}}</td>
+		</tr>
+		<tr>
+			<td>{{post.phone}}</td>
+			<td>{{post.reciever_phone}}</td>
+		</tr>
+	</table>
+	<table align="center" width=90%>
+		<tr>
+			<td>{{post.body}}</td>
+		</tr>
+	</table>
+{% endblock %}
