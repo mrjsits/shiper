@@ -34,9 +34,13 @@ def order_new (request):
 	return render(request, 'order.html', {'form': form, 'code': code})
 
 def order_edit(request, pk):
-	moveback = Moveback()
 	order = get_object_or_404(Info, pk=pk)
 	form = Order(instance = order)
+	moveback = Moveback()
+	max_pk = 0
+	info = Info.objects.all()
+	for i in info:
+		max_pk = max(max_pk, int(i.pk)) 
 	if request.method == "POST":
 		keep = Order(request.POST)	
 		if keep.is_valid():
@@ -46,7 +50,7 @@ def order_edit(request, pk):
 			post.save()
 			form = Order(instance = post)
 			render(request, 'orderedit.html', {'form':form})
-			return redirect('order_edit', pk=str(int(pk)+1))
+			return redirect('order_edit', pk=str(int(max_pk)+1))
 		else:
 			return redirect('order_detail', pk=pk)
 	else:
