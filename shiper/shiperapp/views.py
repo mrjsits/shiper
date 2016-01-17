@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Info, StoreCode
-from .forms import Order, Shipcode
+from .forms import Order, Shipcode, Moveback
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
 
@@ -9,7 +9,11 @@ from django.shortcuts import get_object_or_404
 
 def order_detail(request, pk):
 	post = get_object_or_404(Info, pk=pk)
-	return render(request, 'orderdetail.html', {'post': post})
+	if request.method == "POST":
+		return redirect('order_edit', pk=post.pk)
+	else:
+		post = get_object_or_404(Info, pk=pk)
+		return render(request, 'orderdetail.html', {'post': post})
 
 
 def order_new (request):
@@ -25,10 +29,26 @@ def order_new (request):
 			cc = code.save(commit=False) # because form Shipcode don't have attribute shipcode
 			found = Info.objects.get(shipcode=cc.getcode())	
 			return redirect('order_detail', pk=found.pk)
-		else:	
-			form = Order()
-			return render(request, 'order.html', {'form': form, 'code': code})
+	form = Order()
+	code = Shipcode()
+	return render(request, 'order.html', {'form': form, 'code': code})
+
+def order_edit(request, pk):
+	moveback = Moveback()
+	order = get_object_or_404(Info, pk=pk)
+	form = Order(instance = order)
+	if request.method == "POST":
+		keep = Order(request.POST)	
+		if keep.is_valid():
+			Info.objects.filter(pk=pk).delete()	
+			post = keep.save(commit = False)
+			post.createcode()
+			post.save()
+			form = Order(instance = post)
+			render(request, 'orderedit.html', {'form':form})
+			return redirect('order_edit', pk=str(int(pk)+1))
+		else:
+			return redirect('order_detail', pk=pk)
 	else:
-		form = Order()
-		code = Shipcode()
-		return render(request, 'order.html', {'form': form, 'code': code})
+		return render(request, 'orderedit.html', {'form':form, 'moveback': moveback})
+

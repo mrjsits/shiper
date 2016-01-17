@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %} 
+	<table width="45%">
+		<tr>
+			<td>
+				<form method="POST" class="post-form">{% csrf_token %}	
+				{{form.as_p}} 
+				<button type ="submit" class="save btn btn-default">Save order</button>
+				</form>
+				<form method="POST" class="post-form">{% csrf_token %}	
+				<button type ="submit" class ="save btn btn-default">Finish order</button>
+				</form>
+			</td>
+		</tr>	
+	</table>
+{% endblock %}
+
+

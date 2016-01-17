@@ -79,7 +79,9 @@ table {
 }
 button {
     font-family: 'Lobster', cursive;
+    font-style: bold;
 }
-input{
-font-family: 'Lobster', cursive;
+input, textarea {
+    font-family: 'Lobster', cursive;
+    font-size: 17px;
 }

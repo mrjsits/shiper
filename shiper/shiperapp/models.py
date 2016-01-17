@@ -15,9 +15,8 @@ class Info(models.Model):
 	status = models.BooleanField(default = False)
 	body = models.TextField(default = "Nội dung")
 	
-	def sender(self):
-		return self
-
+	def  savecode(self,code):
+		self.shipcode = code
 
 	def createcode(self):
  		info = Info.objects.all()
