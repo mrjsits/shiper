@@ -11,7 +11,7 @@ class Info(models.Model):
 	reciever_address = models.CharField(max_length=120, default = "Địa chỉ người nhận")
 	reciever_phone = models.CharField(max_length=80, default = "Số điện thoại người nhận")
 	shipcode = models.CharField(max_length=80)
-	created = models.DateTimeField(default=timezone.now(), editable = False)
+	created = models.DateTimeField(default=timezone.now(), editable = True)
 	status = models.BooleanField(default = False)
 	body = models.TextField(default = "Nội dung")
 	
@@ -42,6 +42,6 @@ class Info(models.Model):
 
 
 class StoreCode(models.Model):
-		shipcode = models.CharField(max_length=80)
-		def  getcode(self):
-			return str(self.shipcode)
+	shipcode = models.CharField(max_length=80)
+	def  getcode(self):
+		return str(self.shipcode)

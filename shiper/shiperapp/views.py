@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Info, StoreCode
-from .forms import Order, Shipcode, Moveback
+from .forms import Order, Shipcode, Moveback, Showorder
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
 
@@ -40,7 +40,7 @@ def order_edit(request, pk):
 	max_pk = 0
 	info = Info.objects.all()
 	for i in info:
-		max_pk = max(max_pk, int(i.pk)) 
+		max_pk = max(max_pk, int(i.pk))
 	if request.method == "POST":
 		keep = Order(request.POST)	
 		if keep.is_valid():
@@ -56,3 +56,6 @@ def order_edit(request, pk):
 	else:
 		return render(request, 'orderedit.html', {'form':form, 'moveback': moveback})
 
+def order_show(request):
+	list_order = Info.objects.all()
+	return render(request, 'ordershow.html', {'list_order':list_order})

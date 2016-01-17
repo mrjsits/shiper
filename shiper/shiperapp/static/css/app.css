@@ -85,3 +85,6 @@ input, textarea {
     font-family: 'Lobster', cursive;
     font-size: 17px;
 }
+tr {
+    margin-bottom: 3px;
+}
