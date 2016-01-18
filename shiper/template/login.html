@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<table align = "right">
+	<tr>
+		<td>
+			<a href="http://127.0.0.1:8000/register">Register</a>
+		</td>
+	</tr>
+</table>
+<form method = "POST" class = "post-form">
+	<table width = "45%">
+		<tr>	{% csrf_token %}
+			<td> {{loginform.as_p}}
+				<button type = "submit" class = "save btn btn-default">Login</button>
+			</td>
+		</tr>
+
+	</table>
+</form>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %} 
+<table align = "right">
+	<tr>
+		<td>
+			<a href="http://127.0.0.1:8000/login">Login</a>
+		</td>
+	</tr>
+</table>
+<form method = "POST" class = "post-form">{% csrf_token %}
+	<table width="45%">
+		<tr>
+			<td>{{registerform.as_p}}
+				<button type = "submit" class = "save btn btn-default">Submit</button>
+			</td>
+
+		</tr>
+	</table>
+</form>
+
+{% endblock %}

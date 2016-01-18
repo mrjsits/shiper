@@ -1,15 +1,12 @@
+
 {% extends 'base.html' %}
+{% include "login.html" %}
 {% block content %}
-<form method="POST"  class ="post-form">{% csrf_token %}    
-        <table align=right width="20%">
-            <tr>
-                <td>
-                {{code.as_p}}
-                <button id="order"type ="submit" class="save btn btn-default">Search</button>
-                </td>
-            </tr>
-        </table>
-    </form>
+	<form method = "POST">{% csrf_token %}	
+            {{logouts.as_p}}
+                    <button id="order"type ="submit" class="save btn btn-default">Send Order</button>
+                    <a type="submit" href="">Logout</a>
+        </form>
 	<form method="POST" class="post-form">{% csrf_token %}	
 		<table width="45%">
 			<tr>
