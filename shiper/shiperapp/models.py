@@ -2,9 +2,12 @@ from django.db import models
 from django.utils import timezone
 import  random
 from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 # Create your models here.
 
 class Info(models.Model):
+	username = models.CharField(max_length=120)
 	reciever = models.CharField(max_length=120, default = "Tên người nhận")
 	reciever_address = models.CharField(max_length=120, default = "Địa chỉ người nhận")
 	reciever_phone = models.CharField(max_length=80, default = "Số điện thoại người nhận")
@@ -12,9 +15,6 @@ class Info(models.Model):
 	created = models.DateTimeField(default=timezone.now(), editable = True)
 	status = models.BooleanField(default = False)
 	body = models.TextField(default = "Nội dung")
-	
-	def  savecode(self,code):
-		self.shipcode = code
 
 	def createcode(self):
  		info = Info.objects.all()

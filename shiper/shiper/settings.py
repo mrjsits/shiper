@@ -118,7 +118,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-LOGIN_URL = '/login/'
+LOGIN_URL = '/login/' #change to login because require user for logining, protect page order from anonymous
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
-LOGOUT_URL = '/login/'
+LOGOUT_URL = '/login/' #change to login because after logout, will be user login, protect page order from anonymous

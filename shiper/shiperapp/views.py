@@ -18,12 +18,7 @@ def order_detail(request, pk):
 		post = get_object_or_404(Info, pk=pk)
 		return render(request, 'orderdetail.html', {'post': post})
 
-#if request.user.is_authenticated():
-    # Do something for authenticated users.
-#else:
-    # Do something for anonymous users.
-
-@login_required
+@login_required #important, i am sure :v
 def order_new (request):
 	if request.method == "POST":
 		code = Shipcode(request.POST)
@@ -31,21 +26,22 @@ def order_new (request):
 		logouts = Logout(request.POST)
 		if form.is_valid():
 			post = form.save(commit=False)
-			post.save()
+			post.username = request.user.username
 			post.createcode()
+			post.save()
 			return redirect('order_detail', pk=post.pk)
 		elif code.is_valid():
 			cc = code.save(commit=False) # because form Shipcode don't have attribute shipcode
 			found = Info.objects.get(shipcode=cc.getcode())	
 			return redirect('order_detail', pk=found.pk)
-		elif logouts.is_valid():
-			logout(request)	
+		elif logouts.is_valid(): # click on button logout
+			logout(request)	 #logout function
 			return redirect('loginview')
-	if request.user.is_authenticated():
+	if request.user.is_authenticated(): #check user logined current, if user, that show Order and Logout for waiting logout
 		form = Order()
 		logouts = Logout()
 		return render(request, 'order.html', {'form': form, 'logouts': logouts})
-	#return redirect('loginview')
+	
 
 def order_edit(request, pk):
 	order = get_object_or_404(Info, pk=pk)
@@ -82,7 +78,7 @@ def registerview(request):
 			data = recieveform.save(commit = False)
 			if data.password == data.repeat_password:
 				try:
-					user = User.objects.create_user(request.POST['username'],' ',request.POST['password'])
+					user = User.objects.create_user(request.POST['username'],' ',request.POST['password']) #create user
 					user.save()
 					user.has_perm('foo.add_bar')
 					user.has_perm('foo.change_bar')
@@ -102,10 +98,10 @@ def loginview (request):
 	if request.method == "POST":
 		username = request.POST['username']
 		password = request.POST['password']
-		user = authenticate(username = username, password = password)
-		if user is not None:
-			if user.is_active:
-				login(request, user)
+		user = authenticate(username = username, password = password) #get user from database
+		if user is not None: # found user
+			if user.is_active: 
+				login(request, user) # login function 
 				return redirect('order_new')
 	return render(request, 'login.html', {'loginform': loginform})
 

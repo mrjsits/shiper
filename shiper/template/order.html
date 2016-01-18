@@ -4,15 +4,14 @@
 {% block content %}
 	<form method = "POST">{% csrf_token %}	
             {{logouts.as_p}}
-                    <button id="order"type ="submit" class="save btn btn-default">Send Order</button>
-                    <a type="submit" href="">Logout</a>
-        </form>
+            <button id="order"type ="submit" class="save btn btn-default">Đăng xuất</button>
+    </form>
 	<form method="POST" class="post-form">{% csrf_token %}	
 		<table width="45%">
 			<tr>
 				<td>
 					{{form.as_p}} 
-					<button id="order"type ="submit" class="save btn btn-default">Send Order</button>
+					<button id="order"type ="submit" class="save btn btn-default">Xác nhận</button>
 				</td>
 			</tr>	
 		</table>
