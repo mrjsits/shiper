@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Info, StoreCode, Profile
-from .forms import Order, Shipcode, Moveback, Showorder, Register, Login, UserOrder, Logout
+from .forms import Order, Shipcode, Moveback, Showorder, Register, Login, UserOrder, Logout, Listorder
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
@@ -8,8 +8,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
+#elif code.is_valid():
+#cc = code.save(commit=False) # because form Shipcode don't have attribute shipcode
+#found = Info.objects.get(shipcode=cc.getcode())	
+#return redirect('order_detail', pk=found.pk)
 
-
+@login_required
 def order_detail(request, pk):
 	post = get_object_or_404(Info, pk=pk)
 	if request.method == "POST":
@@ -21,28 +25,24 @@ def order_detail(request, pk):
 @login_required #important, i am sure :v
 def order_new (request):
 	if request.method == "POST":
-		code = Shipcode(request.POST)
-		form = Order(request.POST)
-		logouts = Logout(request.POST)
+		form = Order(request.POST) # order 
 		if form.is_valid():
 			post = form.save(commit=False)
 			post.username = request.user.username
+			user = Profile.objects.get(username=request.user.username)
+			post.name = user.fullname
+			post.address = user.address
+			post.phone = user.phone
 			post.createcode()
 			post.save()
 			return redirect('order_detail', pk=post.pk)
-		elif code.is_valid():
-			cc = code.save(commit=False) # because form Shipcode don't have attribute shipcode
-			found = Info.objects.get(shipcode=cc.getcode())	
-			return redirect('order_detail', pk=found.pk)
-		elif logouts.is_valid(): # click on button logout
-			logout(request)	 #logout function
-			return redirect('loginview')
 	if request.user.is_authenticated(): #check user logined current, if user, that show Order and Logout for waiting logout
 		form = Order()
 		logouts = Logout()
-		return render(request, 'order.html', {'form': form, 'logouts': logouts})
+		ordered = Listorder()
+		return render(request, 'order.html', {'form': form})
 	
-
+@login_required
 def order_edit(request, pk):
 	order = get_object_or_404(Info, pk=pk)
 	form = Order(instance = order)
@@ -56,6 +56,10 @@ def order_edit(request, pk):
 		if keep.is_valid():
 			Info.objects.filter(pk=pk).delete()	
 			post = keep.save(commit = False)
+			user = Profile.objects.get(username=request.user.username)
+			post.name = user.fullname
+			post.address = user.address
+			post.phone = user.phone
 			post.createcode()
 			post.save()
 			form = Order(instance = post)
@@ -65,10 +69,14 @@ def order_edit(request, pk):
 			return redirect('order_detail', pk=pk)
 	else:
 		return render(request, 'orderedit.html', {'form':form, 'moveback': moveback})
-
+@login_required
 def order_show(request):
-	list_order = Info.objects.all()
-	return render(request, 'ordershow.html', {'list_order':list_order})
+	try :
+		list_order = Info.objects.filter(username=request.user.username)
+		return render(request, 'ordershow.html', {'list_order':list_order})
+	except:
+		return redirect('loginview')
+
 
 def registerview(request):
 	registerform = Register()
@@ -105,3 +113,7 @@ def loginview (request):
 				return redirect('order_new')
 	return render(request, 'login.html', {'loginform': loginform})
 
+def logoutview(request):
+	if request.user.is_authenticated():
+		logout(request)
+	return redirect('loginview')

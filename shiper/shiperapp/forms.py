@@ -42,5 +42,9 @@ class UserOrder(forms.ModelForm):
 
 class Logout(forms.ModelForm):
 	class Meta:
-		model = User
+		model = Info
+		fields = []
+class Listorder(forms.ModelForm):
+	class Meta:
+		model = Info
 		fields = []

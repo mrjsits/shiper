@@ -8,13 +8,16 @@ from django.contrib.auth import authenticate, login, logout
 
 class Info(models.Model):
 	username = models.CharField(max_length=120)
-	reciever = models.CharField(max_length=120, default = "Tên người nhận")
-	reciever_address = models.CharField(max_length=120, default = "Địa chỉ người nhận")
-	reciever_phone = models.CharField(max_length=80, default = "Số điện thoại người nhận")
+	name =models.CharField(max_length=120)
+	address = models.CharField(max_length=120)
+	phone = models.CharField(max_length=120)
+	reciever = models.CharField(max_length=120)
+	reciever_address = models.CharField(max_length=120)
+	reciever_phone = models.CharField(max_length=80)
 	shipcode = models.CharField(max_length=80)
 	created = models.DateTimeField(default=timezone.now(), editable = True)
 	status = models.BooleanField(default = False)
-	body = models.TextField(default = "Nội dung")
+	body = models.TextField()
 
 	def createcode(self):
  		info = Info.objects.all()

@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 # Register your models here.
 
 class ControlAdmin(admin.ModelAdmin):
-	list_display =['reciever','reciever_phone','created', 'status']
+	list_display =['username','reciever','reciever_phone','created', 'status']
 	class Meta:
 		models = Info
 admin.site.register(Info, ControlAdmin)

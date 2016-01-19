@@ -1,30 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
 	
-	<table align="center" >
-	{% for post in list_order %}
-	
-		<form method="POST" class="post-form">
+	<table align="center" width="100%" >
+		<th>Reciever</th>
+		<th >Body</th>
+		<th ></th>
+		{% for post in list_order %}
+		<form method="POST" class="post-form">{% csrf_token %}
 			<tr>
-				<td>{{post.name}}</td>
 				<td>{{post.reciever}}</td>
-				<td>{{post.status}}</td>
-				<td><button type="submit" class="save btn btn-default">Remove</button></td>
+				<td colspan="2" rowspan = "2">{{post.body}}</td>
+				<td><button type="submit" class="save btn btn-default">Edit</button></td>
 			</tr>
 			<tr>
-				<td>{{post.address}}</td>
 				<td>{{post.reciever_address}}</td>
-				<td>{{post.shipcode}}</td>
-				<td><button type="submit" class="save btn btn-default">Change</button></td>
 			</tr>
 			<tr>
-				<td>{{post.phone}}</td>
 				<td>{{post.reciever_phone}}</td>
 				<td>{{post.created}}</td>
+
 			</tr>
 		</form>
-		
-		
-	{% endfor %}
+		{% endfor %}
 	</table>
 {% endblock %}
