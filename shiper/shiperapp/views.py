@@ -21,8 +21,7 @@ def order_detail(request, pk):
 	else:
 		post = get_object_or_404(Info, pk=pk)
 		return render(request, 'orderdetail.html', {'post': post})
-
-@login_required #important, i am sure :v
+@login_required
 def order_new (request):
 	if request.method == "POST":
 		form = Order(request.POST) # order 
@@ -40,8 +39,9 @@ def order_new (request):
 		form = Order()
 		logouts = Logout()
 		ordered = Listorder()
-		return render(request, 'order.html', {'form': form})
-	
+		return render(request, 'order.html', {'form': form})	
+	else:
+		return redirect('logoutview')
 @login_required
 def order_edit(request, pk):
 	order = get_object_or_404(Info, pk=pk)

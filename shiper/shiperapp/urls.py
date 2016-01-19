@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 
 urlpatterns = [
+	url(r'^$', views.loginview, name = 'loginview'),
 	url(r'^order/(?P<pk>[0-9]+)/$', views.order_detail, name='order_detail'),
 	url(r'^order/$', views.order_new, name='order_new'),
 	url(r'^order/(?P<pk>[0-9]+)/edit/$', views.order_edit, name='order_edit'),
