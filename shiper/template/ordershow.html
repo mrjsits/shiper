@@ -1,24 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
-	
-	<table align="center" width="100%" >
-		<th>Reciever</th>
-		<th >Body</th>
+	<table align="center" >
+		<th>Người nhận</th>
+		<th >Nội dung</th>
 		<th ></th>
 		{% for post in list_order %}
+
 		<form method="POST" class="post-form">{% csrf_token %}
+
 			<tr>
-				<td>{{post.reciever}}</td>
+				<td width = "25%">{{post.reciever}}</td>
 				<td colspan="2" rowspan = "2">{{post.body}}</td>
-				<td><button type="submit" class="save btn btn-default">Edit</button></td>
+				<td>
+					<button type="submit" class="save btn btn-default">
+						<a href='http://127.0.0.1:8000/order/{{post.pk}}/edit/'>Chỉnh sửa</a>
+					</button>
+				</td>
 			</tr>
 			<tr>
-				<td>{{post.reciever_address}}</td>
+				<td >{{post.reciever_address}}</td>
+				<td>
+					<button type="submit" class="save btn btn-default">
+						<a href='http://127.0.0.1:8000/order/{{post.pk}}/'>Chi tiết</a>
+					</button>
+				</td>
 			</tr>
 			<tr>
 				<td>{{post.reciever_phone}}</td>
 				<td>{{post.created}}</td>
-
 			</tr>
 		</form>
 		{% endfor %}

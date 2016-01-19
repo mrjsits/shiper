@@ -1,21 +1,71 @@
-{% extends 'base.html' %}
-{% block content %} 
-<table align = "right">
-	<tr>
-		<td>
-			<a href="http://127.0.0.1:8000/login">Login</a>
-		</td>
-	</tr>
-</table>
-<form method = "POST" class = "post-form">{% csrf_token %}
-	<table width="45%">
-		<tr>
-			<td>{{registerform.as_p}}
-				<button type = "submit" class = "save btn btn-default">Submit</button>
-			</td>
+{% load staticfiles %}
+<html>
+<head>
+	<title>Shiping route</title>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/dashboard.css">
+    <meta name="robots" content="NONE,NOARCHIVE">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
 
-		</tr>
-	</table>
-</form>
+<body>
+   <div class="page-header">
+        <h1>Fastest and Trustest SHIPPING</h1>
+        <table align = "right">
+			<tr>
+				<td>
+					<a href="http://127.0.0.1:8000/login">Đăng nhập</a>
+				</td>
+			</tr>
+		</table>
+    </div>
+<div class="content container">
+        <div class="row">
+		     <div class="col-md-8">
+				<form method = "POST" class = "post-form">{% csrf_token %}
+					<table width="45%">
+						<tr>
+							<td>
+								<b>Tên đầy đủ</b>
+								{{registerform.fullname}}
+							</td>
+						</tr>
+						<tr>
+							<td><b>Tài khoản</b>
+								{{registerform.username}}
+							</td>
+						</tr>
+						<tr>
+							<td><b>Mật khẩu</b>
+								{{registerform.password}} 
+							</td>
+						</tr>
+						<tr>
+							<td><b>Nhập lại mật khẩu</b>
+								{{registerform.repeat_password}} 
+							</td>
+						</tr>
+						<tr>
+							<td><b>Địa chỉ</b>
+								{{registerform.address}} 
+							</td>
+						</tr>
+						<tr>
+							<td><b>Số điện thoại</b>
+								{{registerform.phone}}
+								<button type = "submit" class = "save btn btn-default"><b>Đăng ký</b></button>
+							</td>
+						</tr>
+						
+								
+						
+					</table>
+				</form>
+           </div>
+        </div>
+</div>
+</body>
+</html>
 
-{% endblock %}

@@ -1,16 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-<table align = "right">
-	<tr>
-		<td>
-			<a href="http://127.0.0.1:8000/order">Đặt ship</a>
-		</td>
-	</tr>
-</table>
 <form method = "POST" class="post-form">{% csrf_token %}
 	<table align="left">
 		<tr>
-			<th>Shipcode</th>
+			<th>Mã ship</th>
 		</tr>
 		<tr>
 			<th>{{post.shipcode}}</th>
@@ -41,7 +34,7 @@
 		</tr>
 		<tr align="right">
 			<td>
-				<button type="submit" class="save btn btn-default">Edit order</button>
+				<button type="submit" class="save btn btn-default"><b>Chỉnh sửa</b></button>
 			</td>
 		</tr>
 	</table>

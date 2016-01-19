@@ -23,7 +23,7 @@ h1 a {
     margin-top: 3px;
     padding: 15px 15px 15px 30px;
 }
-.page-header h1 {
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
     color: #ffffff;
     font-size: 36pt;
     text-decoration: none;
@@ -78,7 +78,6 @@ table {
     margin-top: 10px;
 }
 button {
-    color: black;
     font-family: 'Lobster', cursive;
     font-style: bold;
 }
@@ -88,27 +87,4 @@ input, textarea {
 }
 tr {
     margin-bottom: 3px;
-}
-
-a.facebutton:link, a.facebutton:visited{
-    color: black;
-    font-family: 'Lobster', cursive;
-    font-style: bold;
-}
-
-a:link {
-    color: blue;
-}
-
-/* visited link */
- a:visited {
-    color: blue;
-}
-
-/* mouse over link */
-a:hover {
-    color: hotpink;
-}
-hr {
-    color: black;
 }

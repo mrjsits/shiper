@@ -16,7 +16,7 @@
         <table align = "right">
 			<tr>
 				<td>
-					<a href="http://127.0.0.1:8000/register">Register</a>
+					<a href="http://127.0.0.1:8000/register">Đăng ký</a>
 				</td>
 			</tr>
 		</table>
@@ -26,10 +26,16 @@
             <div class="col-md-8">
 	            
 				<form method = "POST" class = "post-form">
-					<table width = "45%">
-						<tr>	{% csrf_token %}
-							<td> {{loginform.as_p}}
-								<button type = "submit" class = "save btn btn-default">Login</button>
+					<table width = "45%">{% csrf_token %}
+						<tr>	
+							<td><b>Tài khoảng:</b>
+								{{loginform.username}}
+							</td>
+						</tr>
+						<tr>
+							<td> <b>Mật khẩu:</b>
+								{{loginform.password}}
+								<button type = "submit" class = "save btn btn-default"><b>Đăng nhập</b></button>
 							</td>
 						</tr>
 

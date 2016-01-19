@@ -5,13 +5,44 @@
 
     
 	<form method="POST" class="post-form">{% csrf_token %}	
-		<table width="45%">
+		<table width="70%">
 			<tr>
+				<td width = "30%">
+					<b>Người nhận:</b>
+				</td>
 				<td>
-					{{form.as_p}} 
-					<button type ="submit" class="save btn btn-default">Order</button>
+					{{form.reciever}}
 				</td>
 			</tr>	
+			<tr>
+				<td>
+					<b>Địa chỉ:</b>
+				</td>
+				<td>
+					{{form.reciever_address}}
+				</td>
+			</tr>	
+			<tr>
+				<td>
+					<b>Số điện thoại:</b>
+				</td>
+				<td>
+					{{form.reciever_phone}}
+				</td>
+			</tr>	
+			<tr>
+				<td>
+					<b>Nội dung:</b>
+				</td>
+				<td>
+					{{form.body}}
+				</td>
+			</tr>	
+			<tr>
+				<td></td>
+				<td><button type = "submit" class ="save btn btn-default"><b>Đặt</b> </button></td>
+			</tr>
+
 		</table>
 	</form>
 {% endblock %}
