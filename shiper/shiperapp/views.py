@@ -1,17 +1,13 @@
 from django.shortcuts import render, redirect
 from .models import Info, StoreCode, Profile
-from .forms import Order, Shipcode, Moveback, Showorder, Register, Login, UserOrder, Logout, Listorder
+from .forms import Order, Shipcode, Moveback, Showorder, Register, Login, UserOrder, Logout, Listorder, Introduce
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-# Create your views here.
-#elif code.is_valid():
-#cc = code.save(commit=False) # because form Shipcode don't have attribute shipcode
-#found = Info.objects.get(shipcode=cc.getcode())	
-#return redirect('order_detail', pk=found.pk)
+
 
 @login_required
 def order_detail(request, pk):
@@ -68,6 +64,7 @@ def order_edit(request, pk):
 			return redirect('order_detail', pk=pk)
 	else:
 		return render(request, 'orderedit.html', {'form':form, 'moveback': moveback})
+
 @login_required
 def order_show(request):
 	try :
@@ -91,12 +88,9 @@ def registerview(request):
 					user.has_perm('foo.change_bar')
 					user.has_perm('foo.delete_bar')	
 					data.save()
-					form = Order()
-					code = Shipcode()
 					return redirect( 'order_new')
 				except:
 					pass
-	registerform = Register()
 	return render(request, 'register.html', {'registerform': registerform})
 
 
@@ -116,3 +110,8 @@ def logoutview(request):
 	if request.user.is_authenticated():
 		logout(request)
 	return redirect('loginview')
+
+@login_required
+def introduce(request):
+	introdeuce = Introduce()
+	return render(request, 'introduce.html', {'introduce': introdeuce})

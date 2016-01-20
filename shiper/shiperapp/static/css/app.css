@@ -6,8 +6,8 @@ html {
     background-color: #000000
 }
 body {
-    margin-left: 230px;
-    margin-right: 230px;
+    margin-left: 210px;
+    margin-right: 210px;
     padding-left: 15px;
     font-size: 14px;
     background-color: antiquewhite;
@@ -95,7 +95,6 @@ a.facebutton:link, a.facebutton:visited{
     font-family: 'Lobster', cursive;
     font-style: bold;
 }
-
 a:link {
     color: blue;
 }
@@ -111,4 +110,9 @@ a:hover {
 }
 hr {
     color: black;
+}
+div.foot {
+    color: black;
+    font-family: 'Lobster', cursive;
+    font-style: bold;
 }

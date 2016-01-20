@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-	<table align="center" >
+	<table >
 		<th>Người nhận</th>
 		<th >Nội dung</th>
-		<th ></th>
 		{% for post in list_order %}
 
 		<form method="POST" class="post-form">{% csrf_token %}
@@ -13,7 +12,7 @@
 				<td colspan="2" rowspan = "2">{{post.body}}</td>
 				<td>
 					<button type="submit" class="save btn btn-default">
-						<a href='http://mrjsits.pythonanywhere.com/order/{{post.pk}}/edit/'>Chỉnh sửa</a>
+						<a href='http://127.0.0.1:8000/order/{{post.pk}}/edit/'>Chỉnh sửa</a>
 					</button>
 				</td>
 			</tr>
@@ -21,13 +20,20 @@
 				<td >{{post.reciever_address}}</td>
 				<td>
 					<button type="submit" class="save btn btn-default">
-						<a href='http://mrjsits.pythonanywhere.com/order/{{post.pk}}/'>Chi tiết</a>
+						<a href='http://127.0.0.1:8000/order/{{post.pk}}/'>Chi tiết</a>
 					</button>
 				</td>
 			</tr>
 			<tr>
 				<td>{{post.reciever_phone}}</td>
 				<td>{{post.created}}</td>
+				<td></td>
+				{% if not post.status %}
+					<td>Chưa giao</td>
+				{% else %}
+					<td>Đã giao</td>
+				{% endif %}
+
 			</tr>
 		</form>
 		{% endfor %}

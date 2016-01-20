@@ -27,7 +27,7 @@ class Register(forms.ModelForm):
 	repeat_password = forms.CharField(max_length = 120, widget = forms.PasswordInput())
 	class Meta: 
 		model =  Profile
-		fields = ['fullname','username','password', 'repeat_password', 'address', 'phone', 'captcha']
+		fields = ['fullname','username','password', 'repeat_password', 'address', 'phone']
 
 class Login(forms.ModelForm):
 	password = forms.CharField(max_length = 120, widget = forms.PasswordInput())
@@ -45,6 +45,11 @@ class Logout(forms.ModelForm):
 		model = Info
 		fields = []
 class Listorder(forms.ModelForm):
+	class Meta:
+		model = Info
+		fields = []
+
+class Introduce(forms.ModelForm):
 	class Meta:
 		model = Info
 		fields = []

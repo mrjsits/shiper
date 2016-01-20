@@ -1,43 +1,76 @@
-{% extends 'base.html' %}
-{% block content %}
-<form method = "POST" class="post-form">{% csrf_token %}
-	<table align="left">
-		<tr>
-			<th>Mã ship</th>
-		</tr>
-		<tr>
-			<th>{{post.shipcode}}</th>
-		</tr>
-	</table>
-	<table align="center" width=70%>
-		
-		<tr>
-			<th>Bên gửi</th>
-			<th>Bên nhận</th>
-		</tr>
-		<tr>
-			<td>{{post.name}}</td>
-			<td>{{post.reciever}}</td>
-		</tr>
-		<tr>
-			<td>{{post.address}}</td>
-			<td>{{post.reciever_address}}</td>
-		</tr>
-		<tr>
-			<td>{{post.phone}}</td>
-			<td>{{post.reciever_phone}}</td>
-		</tr>
-	</table>
-	<table align="center" width=90%>
-		<tr>
-			<td>{{post.body}}</td>
-		</tr>
-		<tr align="right">
-			<td>
-				<button type="submit" class="save btn btn-default"><b>Chỉnh sửa</b></button>
-			</td>
-		</tr>
-	</table>
-</form>
-
-{% endblock %}
+{% load staticfiles %}
+<html>
+<head>
+	<title>Shiping route</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/dashboard.css">
+    <meta name="robots" content="NONE,NOARCHIVE">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+<body>
+   <div class="page-header">
+        <h1>Fast and Reliable Shipping</h1>
+        <table align="right">
+            <tr>
+                 <td>
+                    <a href="http://127.0.0.1:8000/order">Đặt ship</a>
+                </td>
+                <td>
+                    <a href="http://127.0.0.1:8000/ordershow/">Đã đặt</a>
+                </td>
+                <td>
+                    <a href = "http://127.0.0.1:8000/logout/">Đăng xuất</a>
+                </td>
+               
+            </tr>
+        </table>
+    </div>
+<div class="content container">
+    <div class="row">
+        <div class="col-md-8">
+			<form method = "POST" class="post-form">{% csrf_token %}
+				<table align="left">
+					<tr>
+						<th>Mã ship</th>
+					</tr>
+					<tr>
+						<th>{{post.shipcode}}</th>
+					</tr>
+				</table>
+				<table align="center" width=70%>
+					
+					<tr>
+						<th>Bên gửi</th>
+						<th>Bên nhận</th>
+					</tr>
+					<tr>
+						<td>{{post.name}}</td>
+						<td>{{post.reciever}}</td>
+					</tr>
+					<tr>
+						<td>{{post.address}}</td>
+						<td>{{post.reciever_address}}</td>
+					</tr>
+					<tr>
+						<td>{{post.phone}}</td>
+						<td>{{post.reciever_phone}}</td>
+					</tr>
+				</table>
+				<table align="center" width=90%>
+					<tr>
+						<td>{{post.body}}</td>
+					</tr>
+					<tr align="right">
+						<td>
+							<button type="submit" class="save btn btn-default"><b>Chỉnh sửa</b></button>
+						</td>
+					</tr>
+				</table>
+			</form>
+ 		</div>
+    </div>
+</div>
+</body>
+</html>
